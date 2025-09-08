@@ -2,6 +2,10 @@
 
 PixiJS app that renders random shapes inside a rectangular area, with gravity and HTML controls.
 
+## Builded version
+
+https://romanminchenko.github.io/pixi-falling-shapes-mvc-objectPool/
+
 ## Installation
 
 ### Install
