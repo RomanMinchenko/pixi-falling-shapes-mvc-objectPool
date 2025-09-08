@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000000;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pixi-container {
+  position: relative;
+}
+
+.hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: #080;
+  font: 12px/1.2 monospace;
+}
+
+.hud-stats {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 140px;
+  padding: 6px 8px;
+  background: #020;
+  border-radius: 6px;
+  pointer-events: auto;
+}
+
+.hud-ctrls {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8px;
+  display: flex;
+  gap: 16px;
+  padding: 6px 8px;
+  background: #020;
+  border-radius: 6px;
+  pointer-events: auto;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepper__btn {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #080;
+  border-radius: 50%;
+  cursor: pointer;
+  background: none;
+  color: inherit;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+}
+
+.stepper__val {
+  display: inline-block;
+  min-width: 2ch;
+  margin: 0 8px;
+  font-size: 14px;
+  text-align: center;
+}
