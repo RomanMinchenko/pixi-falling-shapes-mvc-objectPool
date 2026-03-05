@@ -6,10 +6,10 @@ export const getRandomFloat = (min: number, max: number): number => {
   return Math.random() * (max - min) + min;
 };
 
-export const getRandomFromArray = (array: any[]): any => {
+export const getRandomFromArray = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
-}
+};
 
 export const getRandomColor = (): number => {
   return Math.floor(Math.random() * 0xffffff);
-}
+};

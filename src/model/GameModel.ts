@@ -1,6 +1,11 @@
 import ModelPool from "../core/ModelPool";
 import ShapeType from "../core/ShapeType.enum";
-import { getRandomColor, getRandomFloat, getRandomFromArray, getRandomInt } from "../utils/random";
+import {
+  getRandomColor,
+  getRandomFloat,
+  getRandomFromArray,
+  getRandomInt,
+} from "../utils/random";
 import ShapeModel from "./ShapeModel";
 
 const TIME_SCALE = 0.0001;
@@ -75,10 +80,11 @@ export default class GameModel {
   }
 
   public randomlyChangeColorShapesByType(shapeType: ShapeType): void {
-    const sameShapeModels = [...this.shapeModels]
-      .filter((shape: ShapeModel) => {
-        return shape.shapeType === shapeType
-      });
+    const sameShapeModels = [...this.shapeModels].filter(
+      (shape: ShapeModel) => {
+        return shape.shapeType === shapeType;
+      },
+    );
 
     sameShapeModels.forEach((shape: ShapeModel) => {
       const color = getRandomColor();
@@ -126,7 +132,7 @@ export default class GameModel {
   }
 
   public updateSpawnPerSec(delta: number): void {
-    if ((this.spawnPerSec + delta) < 0) return;
+    if (this.spawnPerSec + delta < 0) return;
     this.spawnPerSec = this.spawnPerSec + delta;
   }
 

@@ -36,12 +36,15 @@ export default class GameController {
     }
 
     const { width, height } = this.model.gameAreaSize;
-    if ((time - this.lastTime) > (1000 / this.model.getSpawnPerSec())) {
+    if (time - this.lastTime > 1000 / this.model.getSpawnPerSec()) {
       this.lastTime = time;
 
-      const spawnPosY = gravity === 0
-        ? getRandomInt(50, height - 50)
-        : gravity > 0 ? -50 : height + 50;
+      const spawnPosY =
+        gravity === 0
+          ? getRandomInt(50, height - 50)
+          : gravity > 0
+            ? -50
+            : height + 50;
       this.spawnModel(Math.random() * this.model.gameAreaSize.width, spawnPosY);
     }
 
@@ -50,7 +53,7 @@ export default class GameController {
       if (
         model.position.x < 0 ||
         model.position.x > width ||
-        model.position.y > (height + 100) ||
+        model.position.y > height + 100 ||
         model.position.y < -100
       ) {
         toRemove.push(model);
