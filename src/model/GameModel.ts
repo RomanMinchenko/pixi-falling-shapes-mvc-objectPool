@@ -1,8 +1,13 @@
 import ModelPool from "../core/ModelPool";
 import ShapeType from "../core/ShapeType.enum";
+import { getRandomColor, getRandomFloat, getRandomFromArray, getRandomInt } from "../utils/random";
 import ShapeModel from "./ShapeModel";
 
 const TIME_SCALE = 0.0001;
+const SHAPE_SURFACE_SIZE_RANGE = {
+  min: 500,
+  max: 2500,
+};
 
 export default class GameModel {
   public gameAreaSize = { width: 800, height: 600 };
@@ -30,13 +35,16 @@ export default class GameModel {
 
   public getRandomShapeData() {
     const shapeTypes = Object.values(ShapeType);
+    const randomType = getRandomFromArray(shapeTypes);
 
-    const randomType =
-      shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-    const surfaceSizeArea = Math.random() * 2000 + 500;
-    const color = Math.floor(Math.random() * 0xffffff);
-    const rotation = Math.random() * Math.PI * 2;
-    const rotationSpeed = (Math.random() - 0.5) * TIME_SCALE * 10;
+    const { min, max } = SHAPE_SURFACE_SIZE_RANGE;
+    const surfaceSizeArea = getRandomInt(min, max);
+
+    const color = getRandomColor();
+    const rotation = getRandomFloat(0, Math.PI * 2);
+
+    const maxRotationSpeed = 10 * TIME_SCALE;
+    const rotationSpeed = getRandomFloat(-maxRotationSpeed, maxRotationSpeed);
 
     return { randomType, surfaceSizeArea, color, rotation, rotationSpeed };
   }
@@ -64,6 +72,18 @@ export default class GameModel {
     );
     this.shapeModels.add(model);
     return model;
+  }
+
+  public randomlyChangeColorShapesByType(shapeType: ShapeType): void {
+    const sameShapeModels = [...this.shapeModels]
+      .filter((shape: ShapeModel) => {
+        return shape.shapeType === shapeType
+      });
+
+    sameShapeModels.forEach((shape: ShapeModel) => {
+      const color = getRandomColor();
+      shape.color = color;
+    });
   }
 
   public removeModel(model: ShapeModel): void {
@@ -106,6 +126,7 @@ export default class GameModel {
   }
 
   public updateSpawnPerSec(delta: number): void {
+    if ((this.spawnPerSec + delta) < 0) return;
     this.spawnPerSec = this.spawnPerSec + delta;
   }
 

@@ -69,6 +69,12 @@ export default class GameView {
     this.hudView.render(data);
   }
 
+  public updateShapesColor(): void {
+    this.modelToView.forEach((view: ShapeView) => {
+      view.updateColor();
+    });
+  }
+
   private initEmitter(): void {
     this.events = new EventEmitter<ViewEvents>();
   }

@@ -33,6 +33,12 @@ export default class ShapeView extends Container {
     this.shape?.applySurfaceArea(this.gfx);
   }
 
+  public updateColor(): void {
+    if (this.model) {
+      this.gfx.tint = this.model.color;
+    }
+  }
+
   public update() {
     if (!this.model) return;
     this.position.set(this.model.position.x, this.model.position.y);
